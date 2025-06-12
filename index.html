@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homenagem Dia dos Namorados</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: linear-gradient(to bottom, #fbcfe8, #f9a8d4);
+      overflow-x: hidden;
+    }
+    h1, h2 {
+      font-family: 'Great Vibes', cursive;
+      text-shadow: 1px 1px 3px #f48fb1;
+    }
+    /* Animação de corações subindo */
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      color: #ec4899;
+      font-size: 24px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.8;
+      user-select: none;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-700px) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-6 text-center text-pink-800">
+
+  <h1 class="text-6xl mb-6">Feliz Dia dos Namorados 💖</h1>
+
+  <!-- Foto principal -->
+  <img src="fotos/foto1.jpg" alt="Casal apaixonado" class="rounded-xl shadow-lg max-w-md mb-8 border-8 border-pink-300" />
+
+  <section class="max-w-3xl mb-12 px-4">
+    <h2 class="text-4xl mb-4">Para o meu amor eterno</h2>
+    <p class="text-xl italic mb-6">
+      “Desde o dia em que te conheci, tudo ganhou mais cor e brilho. Você é meu porto seguro, minha inspiração e a razão dos meus melhores sorrisos.”
+    </p>
+    <p class="text-lg">
+      Quero caminhar ao seu lado por todos os dias da vida, dividindo sonhos, abraços e momentos inesquecíveis. Você é o presente mais lindo que o destino poderia me dar.
+    </p>
+  </section>
+
+  <section class="max-w-3xl mb-12 px-4 bg-pink-100 rounded-xl shadow-md p-6">
+    <h2 class="text-3xl mb-4">Nosso Amor em Palavras</h2>
+    <p class="mb-4 text-lg leading-relaxed">
+      “Amar você é descobrir a beleza nos pequenos gestos e sentir que, mesmo nas dificuldades, nosso amor só se fortalece.
+      É saber que ao seu lado encontrei minha melhor versão.”
+    </p>
+    <p class="text-lg">
+      Obrigado por ser minha companhia, meu melhor amigo e o amor da minha vida. Que venham muitos anos de felicidade ao nosso lado.
+    </p>
+  </section>
+
+  <section class="max-w-3xl mt-12 px-4">
+  <h2 class="text-4xl mb-6">Momentos que marcam</h2>
+  <div class="grid grid-cols-2 gap-6">
+    <img src="fotos/foto2.jpg" alt="Momento 1" class="rounded-lg shadow-lg border-4 border-pink-300" />
+    <img src="fotos/foto5.jpg" alt="Momento 2" class="rounded-lg shadow-lg border-4 border-pink-300" />
+    <img src="fotos/foto4.jpg" alt="Momento 3" class="rounded-lg shadow-lg border-4 border-pink-300" />
+    <img src="fotos/foto1.jpg" alt="Momento 4" class="rounded-lg shadow-lg border-4 border-pink-300" />
+  </div>
+</section>
+
+
+  <footer class="mt-16 mb-6 text-pink-600 italic text-lg">
+    Com amor, <br />
+    <strong>Seu nome</strong>
+  </footer>
+
+  <!-- Corações flutuantes -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.fontSize = (12 + Math.random() * 24) + 'px';
+      heart.style.animationDuration = (4 + Math.random() * 6) + 's';
+      heart.textContent = '❤️';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>

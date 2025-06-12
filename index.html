@@ -11,11 +11,29 @@
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       background: linear-gradient(to bottom, #fbcfe8, #f9a8d4);
       overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
     }
     h1, h2 {
       font-family: 'Great Vibes', cursive;
       text-shadow: 1px 1px 3px #f48fb1;
     }
+
+    /* Partículas (estrelas) no fundo */
+    .star {
+      position: fixed;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 3s infinite ease-in-out;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes twinkle {
+      0%, 100% {opacity: 0.8;}
+      50% {opacity: 0.2;}
+    }
+
     /* Animação de corações subindo */
     .heart {
       position: fixed;
@@ -26,6 +44,7 @@
       opacity: 0.8;
       user-select: none;
       pointer-events: none;
+      z-index: 10;
     }
     @keyframes floatUp {
       0% {
@@ -37,16 +56,48 @@
         opacity: 0;
       }
     }
+
+    /* Botão QR */
+    #qrButton {
+      background-color: #ec4899;
+      color: white;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      box-shadow: 0 4px 6px rgba(236,72,153,0.6);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      margin: 1rem auto;
+      display: block;
+      max-width: 250px;
+    }
+    #qrButton:hover {
+      background-color: #db2777;
+    }
+
+    /* Caixa do QR code */
+    #qrCodeContainer {
+      margin: 1rem auto;
+      max-width: 220px;
+      padding: 10px;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(236,72,153,0.5);
+      display: none;
+    }
+
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-6 text-pink-800">
+<body class="min-h-screen flex flex-col items-center p-6 text-center text-pink-800 relative">
 
-  <!-- Foto principal no topo -->
-  <img src="foto1.jpg" alt="Casal apaixonado" class="rounded-xl shadow-lg max-w-lg mb-10 border-8 border-pink-300" />
+  <h1 class="text-6xl mb-6 z-20">Feliz Dia dos Namorados 💖</h1>
 
-  <!-- Texto 1 -->
-  <section class="max-w-3xl mb-16 px-4 text-center">
-    <h1 class="text-6xl mb-6">Feliz Dia dos Namorados 💖</h1>
+  <!-- Foto principal -->
+  <img src="foto1.jpg" alt="Casal apaixonado" class="rounded-xl shadow-lg max-w-md mb-8 border-8 border-pink-300 z-20" />
+
+  <section class="max-w-3xl mb-12 px-4 z-20">
+    <h2 class="text-4xl mb-4">Para o meu amor eterno</h2>
     <p class="text-xl italic mb-6">
       “Desde o dia em que te conheci, tudo ganhou mais cor e brilho. Você é meu porto seguro, minha inspiração e a razão dos meus melhores sorrisos.”
     </p>
@@ -55,44 +106,34 @@
     </p>
   </section>
 
-  <!-- Texto 2 com foto ao lado -->
-  <section class="max-w-5xl mb-16 px-4 flex flex-col md:flex-row items-center md:items-start gap-10">
-    <div class="md:w-1/2 text-center md:text-left">
-      <h2 class="text-4xl mb-6">Nosso Amor em Palavras</h2>
-      <p class="mb-6 text-lg leading-relaxed">
-        “Amar você é descobrir a beleza nos pequenos gestos e sentir que, mesmo nas dificuldades, nosso amor só se fortalece.
-        É saber que ao seu lado encontrei minha melhor versão.”
-      </p>
-      <p class="text-lg">
-        Obrigado por ser minha companhia, meu melhor amigo e o amor da minha vida. Que venham muitos anos de felicidade ao nosso lado.
-      </p>
-    </div>
-    <img src="foto2.jpg" alt="Momento especial" class="md:w-1/2 rounded-lg shadow-lg border-4 border-pink-300" />
+  <section class="max-w-3xl mb-12 px-4 bg-pink-100 rounded-xl shadow-md p-6 z-20">
+    <h2 class="text-3xl mb-4">Nosso Amor em Palavras</h2>
+    <p class="mb-4 text-lg leading-relaxed">
+      “Amar você é descobrir a beleza nos pequenos gestos e sentir que, mesmo nas dificuldades, nosso amor só se fortalece.
+      É saber que ao seu lado encontrei minha melhor versão.”
+    </p>
+    <p class="text-lg">
+      Obrigado por ser minha companhia, meu melhor amigo e o amor da minha vida. Que venham muitos anos de felicidade ao nosso lado.
+    </p>
   </section>
 
-  <!-- Texto 3 com foto ao lado invertido -->
-  <section class="max-w-5xl mb-16 px-4 flex flex-col md:flex-row items-center md:items-start gap-10">
-    <img src="foto3.jpg" alt="Momento especial" class="md:w-1/2 rounded-lg shadow-lg border-4 border-pink-300" />
-    <div class="md:w-1/2 text-center md:text-left">
-      <h2 class="text-4xl mb-6">Momentos que marcam</h2>
-      <p class="text-lg leading-relaxed">
-        Cada instante ao seu lado é uma história de amor que guardo no coração. Que possamos colecionar muitos sorrisos, abraços e conquistas juntos.
-      </p>
+  <!-- Mensagem rotativa -->
+  <p id="mensagem-rotativa" class="text-xl italic text-pink-700 mb-6 z-20"></p>
+
+  <section class="max-w-3xl mt-12 px-4 z-20">
+    <h2 class="text-4xl mb-6">Momentos que marcam</h2>
+    <div class="grid grid-cols-2 gap-6">
+      <img src="foto2.jpg" alt="Momento 1" class="rounded-lg shadow-lg border-4 border-pink-300" />
+      <img src="foto3.jpg" alt="Momento 2" class="rounded-lg shadow-lg border-4 border-pink-300" />
+      <img src="foto4.jpg" alt="Momento 3" class="rounded-lg shadow-lg border-4 border-pink-300" />
+      <img src="foto5.jpg" alt="Momento 4" class="rounded-lg shadow-lg border-4 border-pink-300" />
     </div>
   </section>
 
-  <!-- Últimas quatro fotos em grid no final -->
-  <section class="max-w-4xl mb-16 px-4 text-center">
-    <h2 class="text-4xl mb-8">Recordações Queridas</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <img src="foto4.jpg" alt="Memória 1" class="rounded-lg shadow-lg border-4 border-pink-300" />
-      <img src="foto5.jpg" alt="Memória 2" class="rounded-lg shadow-lg border-4 border-pink-300" />
-      <img src="foto1.jpg" alt="Memória 3" class="rounded-lg shadow-lg border-4 border-pink-300" />
-      <img src="foto2.jpg" alt="Memória 4" class="rounded-lg shadow-lg border-4 border-pink-300" />
-    </div>
-  </section>
+  <button id="qrButton" class="z-20">Mostrar QR Code do Presente</button>
+  <div id="qrCodeContainer" class="z-20"></div>
 
-  <footer class="mb-6 text-pink-600 italic text-lg text-center">
+  <footer class="mt-16 mb-6 text-pink-600 italic text-lg z-20">
     Com amor, <br />
     <strong>Seu nome</strong>
   </footer>
@@ -113,7 +154,67 @@
       }, 10000);
     }
     setInterval(createHeart, 400);
-  </script>
 
-</body>
-</html>
+    // Estrelas no fundo
+    function createStar() {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.width = (1 + Math.random() * 3) + 'px';
+      star.style.height = star.style.width;
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.animationDuration = (2 + Math.random() * 3) + 's';
+      document.body.appendChild(star);
+
+      setTimeout(() => {
+        star.remove();
+      }, 5000);
+    }
+    setInterval(createStar, 300);
+
+    // Mensagem rotativa
+    const frases = [
+      "Você é minha luz nos dias mais escuros.",
+      "Nosso amor é a mais bela história já contada.",
+      "Cada momento contigo é eterno.",
+      "Meu coração bate por você, hoje e sempre."
+    ];
+    let index = 0;
+    const elemento = document.getElementById('mensagem-rotativa');
+
+    function trocaMensagem() {
+      elemento.textContent = frases[index];
+      index = (index + 1) % frases.length;
+    }
+    trocaMensagem();
+    setInterval(trocaMensagem, 4000);
+
+    // Gerar e mostrar QR Code com biblioteca externa (QRCode.js)
+    const qrButton = document.getElementById('qrButton');
+    const qrCodeContainer = document.getElementById('qrCodeContainer');
+    let qrVisible = false;
+
+    // Importar QRCode.js dinamicamente
+    function loadQRCodeLib(callback) {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      script.onload = callback;
+      document.head.appendChild(script);
+    }
+
+    function toggleQRCode() {
+      if (qrVisible) {
+        qrCodeContainer.style.display = 'none';
+        qrCodeContainer.innerHTML = '';
+        qrButton.textContent = 'Mostrar QR Code do Presente';
+        qrVisible = false;
+      } else {
+        qrCodeContainer.style.display = 'block';
+        qrButton.textContent = 'Ocultar QR Code do Presente';
+
+        // Criar QR Code - coloque aqui o link do seu presente (exemplo)
+        const urlPresente = 'https://pjhevison.github.io/Dia-dos-namorados/';
+
+        new QRCode(qrCodeContainer, {
+          text: urlPresente,
+          width
